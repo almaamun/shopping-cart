@@ -25,11 +25,11 @@
 
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="quant-decrease-btn" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="quant-value" type="text" class="form-control text-center" value="1">
+                           <button id="quant-increase-btn" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
-                        <h5>$1219</h5>
+                        <h5>$ <span id= "price-value">1219</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -43,12 +43,12 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="p2-quant-decrease-btn" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="p2-quant-value" type="text" class="form-control text-center" value="1">
+                           <button id="p2-quant-increase-btn" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                         </div>
-                        <h5>$59</h5>
+                        <h5>$<span id= "p2-price-value">59</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -64,9 +64,9 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$1,278</h5>
-                        <h5>$0</h5>
-                        <h5>$1,278</h5>
+                        <h5>$ <span id="subtotal-value">00</span> </h5>
+                        <h5>$ <span id="tax-value">00</span></h5>
+                        <h5>$<span id="total-value">00</h5>
                      </div>
                   </div>
                </div>
@@ -78,5 +78,55 @@
       </div>
    </section>
 </body>
+<script>
+   //Quantity Increase event handler
 
+   const quantIncreaseBtn = document.getElementById("quant-increase-btn");
+   quantIncreaseBtn.addEventListener("click", function(){
+         quantAdd("quant-value", "price-value", 1219);
+      
+   });
+   //product 2 Increase event handler
+   const quantIncreaseBtn2 = document.getElementById("p2-quant-increase-btn");
+   quantIncreaseBtn2.addEventListener("click", function(){
+      quantAdd("p2-quant-value", "p2-price-value", 59);
+   })
+   //Increase function
+   function quantAdd(id, priceInnerTextId, price){
+      const quantValue = document.getElementById(id).value;
+         const quantNumber = parseFloat(quantValue); 
+         const incQuant = quantNumber + 1;
+         document.getElementById(id).value = incQuant;
+         const value="";
+         const multiPrice = price * incQuant; 
+         document.getElementById(priceInnerTextId).innerText = multiPrice;
+   }
+   //Quantity Decrease event handler
+   //product 1 Decrease event handler
+   const quantDecreaseBtn = document.getElementById("quant-decrease-btn");
+   quantDecreaseBtn.addEventListener("click", function(){
+         quantDecrease("quant-value", "price-value", 1219);
+         
+   })
+   //Product 2 Decrease event hanlder
+   const quantDecreaseBtn2 = document.getElementById("p2-quant-decrease-btn");
+   quantDecreaseBtn2.addEventListener("click", function(){
+      quantDecrease("p2-quant-value", "p2-price-value", 59);
+         
+   })
+   //Decrease function
+   function quantDecrease(id,innerTextId, price){
+      const quantValue = document.getElementById(id).value;
+         const quantNumber = parseFloat(quantValue); 
+         const incQuant = quantNumber - 1;
+         document.getElementById(id).value = incQuant;
+         
+         const priceValue = document.getElementById(id).innerText;
+         priceValueNumber = parseFloat(priceValue);
+         const multiPrice = price * incQuant;
+         document.getElementById(innerTextId).innerText = multiPrice;
+   }
+   //SubTotal section is here
+   
+</script>
 </html>
